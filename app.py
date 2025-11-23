@@ -133,49 +133,34 @@ HF_REPO_ID = "harshit1272/ayurveda-faiss"
 HF_FILE_FAISS = "index.faiss"
 HF_FILE_META = "index.pkl"
 
+from huggingface_hub import hf_hub_download
+from langchain_community.vectorstores import FAISS
+from langchain_community.embeddings import HuggingFaceEmbeddings
+
 @st.cache_resource
 def load_faiss():
-    """
-    Download FAISS index files from Hugging Face Hub (if not already cached),
-    store them locally, and load them as a LangChain FAISS vectorstore.
-    """
     try:
-        # Embedding model
-        embeddings = HuggingFaceEmbeddings(
-            model_name="sentence-transformers/all-MiniLM-L6-v2"
+        hf_token = st.secrets["HF_TOKEN"]
+
+        # Download FAISS files from HuggingFace
+        index_file = hf_hub_download(
+            repo_id="harshit1272/ayurveda-faiss",
+            filename="index.faiss",
+            repo_type="dataset",
+            token=hf_token
+        )
+        pkl_file = hf_hub_download(
+            repo_id="harshit1272/ayurveda-faiss",
+            filename="index.pkl",
+            repo_type="dataset",
+            token=hf_token
         )
 
-        # Local cache folder
-        base_dir = os.path.dirname(os.path.abspath(__file__))
-        faiss_dir = os.path.join(base_dir, "faiss_cache")
-        os.makedirs(faiss_dir, exist_ok=True)
+        embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
-        # Local file paths
-        faiss_path = os.path.join(faiss_dir, HF_FILE_FAISS)
-        meta_path = os.path.join(faiss_dir, HF_FILE_META)
-
-        # Download FAISS file if not present
-        if not os.path.exists(faiss_path):
-            fp = hf_hub_download(
-                repo_id=HF_REPO_ID,
-                filename=HF_FILE_FAISS,
-                token=st.secrets["HF_TOKEN"]
-            )
-            shutil.copy(fp, faiss_path)
-
-        # Download metadata file if not present
-        if not os.path.exists(meta_path):
-            fp = hf_hub_download(
-                repo_id=HF_REPO_ID,
-                filename=HF_FILE_META,
-                token=st.secrets["HF_TOKEN"]
-            )
-            shutil.copy(fp, meta_path)
-
-        # Load FAISS store
         return FAISS.load_local(
-            faiss_dir,
-            embeddings,
+            folder_path=os.path.dirname(index_file),
+            embeddings=embeddings,
             allow_dangerous_deserialization=True
         )
 
