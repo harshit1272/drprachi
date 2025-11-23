@@ -388,33 +388,23 @@ if st.session_state.current_view == "report" and st.session_state.final_diagnosi
     
     st.markdown("---")
     
-    # 2. VISUAL REFERENCE & ANALYSIS (ALIGNED)
-    st.markdown("<div class='report-row'>", unsafe_allow_html=True)
-    c_img, c_text = st.columns([1, 2], gap="large") 
-    
-    with c_img:
-        st.markdown("<div class='report-col'>", unsafe_allow_html=True)
-        st.markdown("**Visual Reference:**")
-        if os.path.exists("doshas.jpg"):
-            st.image("doshas.jpg", caption="Tridosha Balance Chart", width=350)
-        else:
-            st.info("[Dosha Chart Image Missing: Please add 'doshas.jpg']")
-        st.markdown("</div>", unsafe_allow_html=True)
-        
-    with c_text:
-        st.markdown("<div class='report-col'>", unsafe_allow_html=True)
-        st.markdown(f"""
-        <div class='reasoning-box'>
-            <div>
-                <strong style='color: #5d4037; font-size: 1.1em;'>💡 Dr. Prachi's Analysis:</strong><br><br>
-                {d.get('calculation_logic', 'Analysis based on age, weight, and symptoms.')}
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        st.markdown("</div>", unsafe_allow_html=True)
+    # 2. VISUAL REFERENCE + ANALYSIS (STACKED, NOT SIDE-BY-SIDE)
+    st.markdown("### 📊 Visual Reference")
+    if os.path.exists("doshas.jpg"):
+        st.image("doshas.jpg", caption="Tridosha Balance Chart", width=350)
+    else:
+        st.info("[Dosha Chart Image Missing: Please add 'doshas.jpg']")
 
-    st.markdown("</div>", unsafe_allow_html=True)
-    
+    st.markdown("### 💡 Dr. Prachi's Analysis")
+
+    st.markdown(f"""
+    <div class='reasoning-box'>
+        <div>
+            {d.get('calculation_logic', 'Analysis based on age, weight, and symptoms.')}
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
     st.markdown("---")
 
     # 3. DIAGNOSIS
