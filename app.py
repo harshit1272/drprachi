@@ -389,23 +389,28 @@ if st.session_state.current_view == "report" and st.session_state.final_diagnosi
     st.markdown("---")
     
     # 2. VISUAL REFERENCE + ANALYSIS (STACKED, NOT SIDE-BY-SIDE)
-    st.markdown("### 📊 Visual Reference")
-    if os.path.exists("doshas.jpg"):
-        st.image("doshas.jpg", caption="Tridosha Balance Chart", width=350)
-    else:
-        st.info("[Dosha Chart Image Missing: Please add 'doshas.jpg']")
+        st.markdown("### 📊 Visual Reference:")
 
-    st.markdown("### 💡 Dr. Prachi's Analysis")
+        # Center the image cleanly
+        st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
+        if os.path.exists("doshas.jpg"):
+            st.image("doshas.jpg", caption="Tridosha Balance Chart", width=350)
+        else:
+            st.info("[Dosha Chart Image Missing: Please add 'doshas.jpg']")
+        st.markdown("</div>", unsafe_allow_html=True)
 
-    st.markdown(f"""
-    <div class='reasoning-box'>
-        <div>
-            {d.get('calculation_logic', 'Analysis based on age, weight, and symptoms.')}
+        # Analysis full-width
+        st.markdown("### 💡 Dr. Prachi's Analysis:")
+
+        st.markdown(f"""
+        <div class='reasoning-box' style='width:100%;'>
+            <div>
+                {d.get('calculation_logic', 'Analysis based on age, weight, and symptoms.')}
+            </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
-    st.markdown("---")
+        st.markdown("---")
 
     # 3. DIAGNOSIS
     st.subheader("2. Diagnosis (Nidan)")
