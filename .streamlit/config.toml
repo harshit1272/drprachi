@@ -1,0 +1,7 @@
+[theme]
+base = "light"
+primaryColor = "#15803d"          # Deep herbal green
+backgroundColor = "#fffef2"       # Creamy off-white (parchment style)
+secondaryBackgroundColor = "#f0fdf4" # Very light mint green (sidebar)
+textColor = "#1e1e1e"             # Dark charcoal for readability
+font = "sans serif"

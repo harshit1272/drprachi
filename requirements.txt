@@ -1,0 +1,13 @@
+streamlit
+langchain
+langchain-core
+langchain-community
+langchain-google-genai
+sentence-transformers
+faiss-cpu
+pymupdf
+pytesseract
+pdf2image
+pillow
+huggingface_hub
+sentence-transformers

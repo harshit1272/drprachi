@@ -1,0 +1,32 @@
+# ---- FAISS INDEX (large files - NEVER COMMIT) ----
+ayurveda_faiss_index/
+faiss_cache/
+*.faiss
+*.pkl
+
+# ---- Streamlit Secrets ----
+.streamlit/secrets.toml
+
+# ---- Python Cache ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ---- Virtual Environment ----
+venv/
+env/
+.venv/
+
+# ---- OS Specific ----
+.DS_Store
+Thumbs.db
+
+# ---- Streamlit ----
+.streamlit/*.lock
+
+# ---- VSCode ----
+.vscode/
+
+# --- Secrets ----
+.streamlit/secrets.toml
