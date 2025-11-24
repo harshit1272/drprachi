@@ -14,7 +14,7 @@ import json
 # =====================================================
 # 1. SETUP & STATE
 # =====================================================
-st.set_page_config(page_title="VedaCure AI", page_icon="🌿", layout="wide")
+st.set_page_config(page_title="Ayurveda Cure", page_icon="🌿", layout="wide")
 
 def init_state():
     if "messages" not in st.session_state:
@@ -358,7 +358,7 @@ with st.sidebar:
 # 5. MAIN INTERFACE
 # =====================================================
 st.markdown(
-    "<div class='header-box'><h1>🌿 VedaCure AI</h1><p>Authentic Ayurvedic Diagnosis & Formulation</p></div>",
+    "<div class='header-box'><h1>🌿 Ayurveda Chat</h1><p>Authentic Ayurvedic Diagnosis & Formulation</p></div>",
     unsafe_allow_html=True,
 )
 
